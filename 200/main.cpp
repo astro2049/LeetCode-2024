@@ -26,6 +26,7 @@ public:
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1' && !visited[i][j]) {
                     islandCount++;
+                    visited[i][j] = true;
                     traverseIsland(i, j, grid);
                 }
             }
@@ -34,12 +35,12 @@ public:
     }
 
     void traverseIsland(int i, int j, vector<vector<char>> &grid) {
-        visited[i][j] = true;
         for (auto offset: offsets) {
             int ii = i + offset[0], jj = j + offset[1];
             if (ii < 0 || ii >= m || jj < 0 || jj >= n || grid[ii][jj] == '0' || visited[ii][jj]) {
                 continue;
             }
+            visited[ii][jj] = true;
             traverseIsland(ii, jj, grid);
         }
     }
