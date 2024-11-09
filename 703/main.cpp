@@ -13,28 +13,30 @@ int main() {
 class KthLargest {
 public:
     int k;
-    priority_queue<int, vector<int>, greater<>> firstKMinus1Pq;
-    priority_queue<int> fromKPq;
+    priority_queue<int, vector<int>, greater<>> firstKPq;
 
     KthLargest(int k, vector<int> &nums) {
         this->k = k;
         sort(nums.begin(), nums.end(), greater<>());
-        for (int i = 0; i < k - 1; i++) {
-            firstKMinus1Pq.push(nums[i]);
+        int i = 0;
+        for (; i < nums.size() && i < k; i++) {
+            firstKPq.push(nums[i]);
         }
-        for (int i = k - 1; i < nums.size(); i++) {
-            fromKPq.push(nums[i]);
+        for (; i < nums.size(); i++) {
+            if (nums[i] > firstKPq.top()) {
+                firstKPq.push(nums[i]);
+                firstKPq.pop();
+            }
         }
     }
 
     int add(int val) {
-        firstKMinus1Pq.push(val);
+        firstKPq.push(val);
         // Oops, queue overflow
-        if (firstKMinus1Pq.size() > k - 1) {
-            fromKPq.push(firstKMinus1Pq.top());
-            firstKMinus1Pq.pop();
+        if (firstKPq.size() > k) {
+            firstKPq.pop();
         }
-        return fromKPq.top();
+        return firstKPq.top();
     }
 };
 
