@@ -21,10 +21,10 @@ public:
                 return stoi(s);
             } else {
                 for (int i = 0; i < s.length(); i++) {
-                    if (s[i] > maxx[i]) {
-                        return 0;
-                    } else if (s[i] < maxx[i]) {
+                    if (s[i] < maxx[i]) {
                         break;
+                    } else if (s[i] > maxx[i]) {
+                        return 0;
                     }
                 }
                 return stoi(s);
@@ -39,10 +39,10 @@ public:
                 return stoi(s);
             } else {
                 for (int i = 1; i < s.length(); i++) {
-                    if (s[i] > minn[i]) {
-                        return 0;
-                    } else if (s[i] < minn[i]) {
+                    if (s[i] < minn[i]) {
                         break;
+                    } else if (s[i] > minn[i]) {
+                        return 0;
                     }
                 }
                 return stoi(s);
