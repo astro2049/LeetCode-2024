@@ -22,6 +22,9 @@ public:
         }
 
         for (int i = 0; i < numCourses; i++) {
+            if (visited[i] == 2) {
+                continue;
+            }
             visited[i] = 1;
             if (!dfs(i)) {
                 return false;
