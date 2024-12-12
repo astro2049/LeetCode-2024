@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
@@ -25,6 +26,24 @@ public:
                     count++;
                 }
             }
+        }
+
+        return count;
+    }
+};
+
+class Solution1 {
+public:
+    int subarraySum(vector<int> &nums, int k) {
+        int sum = 0;
+        unordered_map<int, int> map = {{0, 1}};
+        int count = 0;
+        for (auto &num: nums) {
+            sum += num;
+            if (map.find(sum - k) != map.end()) {
+                count += map[sum - k];
+            }
+            map[sum]++;
         }
 
         return count;
